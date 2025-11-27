@@ -153,7 +153,11 @@ async function processFileUpload(context, formdata = null) {
             fileExt = 'unknown' // 默认扩展名
         }
     }
-
+    const ALLOWED_EXTENSIONS = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg', 'bmp'];
+    if (!ALLOWED_EXTENSIONS.includes(fileExt)) {
+        alert(`不支持的文件扩展名：${fileExt}，仅允许上传图片`);
+        return;
+    }
     // 构建文件ID
     const fullId = await buildUniqueFileId(context, fileName, fileType);
 
